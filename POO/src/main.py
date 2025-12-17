@@ -1,8 +1,9 @@
 from pathlib import Path
-
 # Imports relativos al paquete src
 from src.data_loader import LOADER_FACTORY, ExcepcionCalidad
 from src.data_preprocessor import DataPreprocessor
+# Librería para tabular datos de manera presentable
+from tabulate import tabulate
 
 # -------------------------------
 # Funcion principal
@@ -50,7 +51,7 @@ def carga_procesa(filepath, **kwargs):
 
 
 # -------------------------------
-# Informacion global del DF
+# Informacion general del DF final
 # -------------------------------
 
 if __name__ == "__main__":
@@ -60,11 +61,12 @@ if __name__ == "__main__":
 
         # Imprimir calidad de datos
         print("\nCalidad de datos (valores nulos por columna):")
-        print(quality)
+        print(quality)  
 
-        # Muestra el DF tabulado
+        # Muestra el DF tabulado (primeras 5 filas)
         print("\nVista del DataFrame final (primeras 5 filas):")
-        print(df.head(5).to_markdown(index=False))
+        print(tabulate(df.head(5).to_dict(orient='records'),
+                       headers='keys', tablefmt='grid', showindex=False))
 
     except ExcepcionCalidad:
         print("\nProceso detenido por falla critica de calidad de datos.")
