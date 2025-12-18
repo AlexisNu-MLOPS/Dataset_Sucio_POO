@@ -4,9 +4,9 @@ name: potencia_flake8 + pytest
 # Specifies the trigger for this workflow.
 # Especifica el trigger que inicia el workflow
 on:
-  # Si hacemos push desde rama "potencia" -> inicia workflow
+  # Si hacemos push desde rama "actions" -> inicia workflow
   push:
-    branches: [ potencia] 
+    branches: [ actions] 
   # Si hacemos pull request hacia main -> inicia workflow  
   pull_request:
     branches: [ main ]
