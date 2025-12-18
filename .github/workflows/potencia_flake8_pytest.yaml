@@ -1,5 +1,5 @@
 # Nombre del workflow
-name: potencia_flake8 + pytest
+name: flake8 + pytest
 
 # Specifies the trigger for this workflow.
 # Especifica el trigger que inicia el workflow
