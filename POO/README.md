@@ -77,3 +77,13 @@ Desde la carpeta `POO`:
 
 ```bash
 python src/main.py
+
+## Autores
+
+Proyecto desarrollado como práctica académica  
+para el módulo de **Programación Orientada a Objetos**.
+
+**Equipo:**
+- Alexis Nuñez  
+- Jose Benjamin Flores  
+- Sonia Avilés Sacoto
