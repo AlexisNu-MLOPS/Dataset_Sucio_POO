@@ -1,20 +1,20 @@
 """
-Pruebas unitarias para el módulo DataPreprocessor.
+Pruebas unitarias para el modulo DataPreprocessor.
 
 Este archivo valida las distintas etapas de limpieza,
-estandarización y validación de calidad de un DataFrame.
+estandarizacion y validacion de calidad de un DataFrame.
 
 Las pruebas cubren:
 - Limpieza de nombres de columnas
-- Conversión de valores vacíos a nulos
-- Limpieza de columnas numéricas (montos)
-- Conversión de scores de texto a valores numéricos
-- Eliminación de acentos
-- Creación de columnas bandera para valores nulos
-- Validación de nulos críticos según un umbral definido
+- Conversion de valores vacíos a nulos
+- Limpieza de columnas numericas (montos)
+- Conversion de scores de texto a valores numericos
+- Eliminacion de acentos
+- Creacion de columnas bandera para valores nulos
+- Validacion de nulos críticos según un umbral definido
 - Resumen de calidad del DataFrame
 
-Estas pruebas aseguran que los datos estén listos
+Estas pruebas aseguran que los datos esten listos
 para su uso posterior en análisis o modelos.
 """
 import pandas as pd
@@ -31,8 +31,8 @@ def test_clean_columns():
 
     Se valida que:
     - Se eliminen caracteres especiales
-    - Se utilicen minúsculas
-    - Se reemplacen nombres a un formato estándar
+    - Se utilicen minusculas
+    - Se reemplacen nombres a un formato estandar
     """
     df = pd.DataFrame(columns=["Score (1-5)", "¿Es_Fraude?", "Notes & Comments"])
     result = DataPreprocessor(df).clean_columns()
@@ -52,8 +52,8 @@ def test_vacios_a_nulos():
 def test_limpieza_monto():
     """
     Verifica que la limpieza de la columna monto:
-    - Elimine símbolos de moneda y separadores
-    - Convierta los valores a tipo numérico
+    - Elimine simbolos de moneda y separadores
+    - Convierta los valores a tipo numerico
     - Asigne NaN a valores no convertibles
     """
     df = pd.DataFrame({"monto": ["$1,000", "2000", "texto"]})
@@ -64,8 +64,8 @@ def test_limpieza_monto():
 
 def test_limpieza_score():
     """
-    Verifica la conversión de scores expresados en texto
-    (uno, dos, tres, etc.) a valores numéricos enteros.
+    Verifica la conversion de scores expresados en texto
+    (uno, dos, tres, etc.) a valores numericos enteros.
     """
     df = pd.DataFrame({"score": ["uno", "dos", "tres", "cuatro", "cinco"]})
     result = DataPreprocessor(df).limpieza_score()
@@ -86,7 +86,7 @@ def test_eliminar_acentos():
 
 def test_ban_columnas_nulas():
     """
-    Verifica la creación de columnas bandera (_nan) que indican
+    Verifica la creacion de columnas bandera (_nan) que indican
     la presencia de valores nulos en el DataFrame.
     """
     df = pd.DataFrame({"a": [1, None], "b": ["x", None]})
@@ -97,8 +97,8 @@ def test_ban_columnas_nulas():
 
 def test_validar_nulos_criticos_falla():
     """
-    Verifica que se lance una excepción cuando el porcentaje
-    de valores nulos en columnas críticas supera el umbral definido.
+    Verifica que se lance una excepcion cuando el porcentaje
+    de valores nulos en columnas criticas supera el umbral definido.
     """
     df = pd.DataFrame({
         "fraude": [None, None, 1],
@@ -110,7 +110,7 @@ def test_validar_nulos_criticos_falla():
 
 def test_validar_nulos_criticos_ok():
     """
-    Verifica que el DataFrame pase la validación de calidad
+    Verifica que el DataFrame pase la validacion de calidad
     cuando el porcentaje de valores nulos está dentro del umbral permitido.
     """
     df = pd.DataFrame({

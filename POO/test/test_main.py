@@ -1,35 +1,35 @@
 """
-Prueba de integración para el módulo main.
+Prueba de integracion para el modulo main.
 
 Este archivo valida el funcionamiento end-to-end del pipeline completo,
-asegurando que los distintos módulos trabajen correctamente en conjunto.
+asegurando que los distintos modulos trabajen en conjunto.
 
 Se prueba el flujo completo:
 1. Carga del archivo CSV
-2. Limpieza y estandarización de columnas
-3. Conversión de tipos de datos
-4. Generación de columnas bandera para valores nulos
-5. Evaluación de la calidad del DataFrame
+2. Limpieza y estandarizacion de columnas
+3. Conversion de tipos de datos
+4. Generacion de columnas bandera para valores nulos
+5. Evaluacion de la calidad del DataFrame
 
-A diferencia de las pruebas unitarias, aquí se valida la integración
+A diferencia de las pruebas unitarias, aqui se valida la integracion
 entre DataLoader, DataPreprocessor y la función principal del pipeline.
 """
 import pandas as pd
 import pytest
 from src.main import carga_procesa
 
-#Se genera un csv para la prueba del correcto funcionameinto del main.py
+#Se genera un csv para la prueba del correcto funcionamiento del main.py
 @pytest.fixture
 def prueba_csv(tmp_path):
     """
-    Fixture que genera un archivo CSV temporal con datos simulados
+    Fixture genera un archivo CSV temporal con datos simulados
     para probar el correcto funcionamiento del pipeline completo.
 
     El archivo contiene columnas con:
     - Nombres sucios
-    - Valores monetarios con símbolos
+    - Valores monetarios con simbolos
     - Scores en texto
-    - Valores nulos y vacíos
+    - Valores nulos y vacios
 
     Retorna la ruta al archivo CSV generado.
     """
@@ -49,16 +49,16 @@ def prueba_csv(tmp_path):
 
 def test_carga_procesa_csv(prueba_csv):
     """
-    Verifica que la función principal del pipeline (carga_procesa)
-    procese correctamente un archivo CSV y retorne:
+    Verifica que la funcion principal del pipeline (carga_procesa)
+    procese un archivo CSV y retorne:
 
     - Un DataFrame limpio y estandarizado
     - Un resumen de calidad del DataFrame
 
     Se validan:
-    - Existencia de columnas críticas
-    - Creación de columnas bandera (_nan)
-    - Conversión correcta de tipos de datos
+    - Existencia de columnas criticas
+    - Creacion de columnas bandera (_nan)
+    - Conversion correcta de tipos de datos
     - Tipo de retorno del resumen de calidad
     """
     df, quality = carga_procesa(prueba_csv, sep=",", encoding="utf-8")

@@ -1,14 +1,14 @@
 """
-Pruebas unitarias para el módulo DataLoader.
+Pruebas unitarias para el modulo DataLoader.
 
 Este archivo valida el comportamiento del sistema de carga de datos,
 asegurando que:
 
 - Se lance un error cuando se intenta cargar un archivo
-  sin una implementación concreta.
+  sin una implementacion concreta.
 - Los archivos CSV se carguen correctamente en un DataFrame.
-- El mecanismo de fábrica (factory) seleccione la clase correcta
-  según la extensión del archivo.
+- El mecanismo de fabrica (factory) seleccione la clase correcta
+  segun la extension del archivo.
 
 Estas pruebas garantizan que la entrada de datos al pipeline
 sea consistente y controlada.
@@ -27,11 +27,11 @@ from src.data_loader import (
 def test_dataloader_read_file_lanza_error():
     """
     Verifica que la clase base DataLoader lance un error
-    cuando se intenta usar el método read_file sin
-    una implementación concreta.
+    cuando se intenta usar el metodo read_file sin
+    una implementacion concreta.
 
-    Esto asegura que DataLoader actúe como clase abstracta
-    y obligue a usar una subclase específica.
+    Esto asegura que DataLoader actue como clase abstracta
+    y obligue a usar una subclase especifica.
     """
     loader = DataLoader("archivo.fake")
     with pytest.raises(NotImplementedError):
@@ -57,11 +57,11 @@ def test_carga_csv(tmp_path):
 def test_loader_factory():
     """
     Verifica que el diccionario EXTENSION_COMPATIBLE
-    asocie correctamente cada extensión de archivo
+    asocie correctamente cada extension de archivo
     con su clase de carga correspondiente.
 
-    Esto valida el patrón Factory implementado
-    para seleccionar dinámicamente el cargador adecuado.
+    Esto valida el patron Factory implementado
+    para seleccionar dinamicamente el cargador adecuado.
     """
     assert EXTENSION_COMPATIBLE[".csv"] is CargaCSV
     assert EXTENSION_COMPATIBLE[".xlsx"] is CargaExcel
