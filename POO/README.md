@@ -76,4 +76,4 @@ implementadas con `pytest`.
 Desde la carpeta `POO`:
 
 ```bash
-python src/main.py
+python - m src.main
