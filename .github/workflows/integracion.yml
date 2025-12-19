@@ -30,12 +30,12 @@ jobs:
 
       - name: Configurar PYTHONPATH
         run: |
-          echo "PYTHONPATH=$PYTHONPATH:$(pwd)/src" >> $GITHUB_ENV
+          echo "PYTHONPATH=$PYTHONPATH:$(pwd)/POO/src" >> $GITHUB_ENV
 
       - name: Ejecutar tests
-        run: pytest test
+        run: pytest POO/test
 
-      # Ejecutar main SOLO en features/tests (push o PR)
+      # Ejecutar main solo en features/tests (push o PR)
       - name: Ejecutar main
         if: github.ref == 'refs/heads/features/tests' || github.head_ref == 'features/tests'
         run: python -m src.main
