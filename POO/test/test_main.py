@@ -20,7 +20,7 @@ from src.main import carga_procesa
 
 #Se genera un csv para la prueba del correcto funcionameinto del main.py
 @pytest.fixture
-def test_csv(tmp_path):
+def prueba_csv(tmp_path):
     """
     Fixture que genera un archivo CSV temporal con datos simulados
     para probar el correcto funcionamiento del pipeline completo.
