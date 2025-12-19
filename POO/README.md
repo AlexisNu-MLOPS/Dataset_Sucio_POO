@@ -2,7 +2,7 @@
 ---
 ## Enfoque Modular
 
-El proyecto está diseñado de forma **modular**, separando claramente las
+El proyecto está diseñado de forma **modular**, separando las
 responsabilidades de cada etapa del pipeline:
 
 ### DataLoader (`data_loader.py`)
@@ -10,7 +10,7 @@ Encargado de la **carga de archivos** y su conversión a `pandas.DataFrame`.
 
 Características:
 - Implementa un patrón **Factory**
-- Selecciona dinámicamente el cargador según la extensión del archivo
+- Selecciona el cargador según la extensión del archivo
 - Soporta los siguientes formatos:
   - CSV
   - Excel (`.xls`, `.xlsx`)
@@ -66,7 +66,7 @@ implementadas con `pytest`.
 
 - **`test_main.py`**
   - Valida el funcionamiento end-to-end del pipeline
-  - Comprueba que los módulos trabajen correctamente en conjunto
+  - Comprueba que los módulos trabajen en conjunto
   - Verifica la correcta salida del DataFrame y su evaluación de calidad
 
 ---
