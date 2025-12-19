@@ -1,3 +1,19 @@
+"""
+Prueba de integración para el módulo main.
+
+Este archivo valida el funcionamiento end-to-end del pipeline completo,
+asegurando que los distintos módulos trabajen correctamente en conjunto.
+
+Se prueba el flujo completo:
+1. Carga del archivo CSV
+2. Limpieza y estandarización de columnas
+3. Conversión de tipos de datos
+4. Generación de columnas bandera para valores nulos
+5. Evaluación de la calidad del DataFrame
+
+A diferencia de las pruebas unitarias, aquí se valida la integración
+entre DataLoader, DataPreprocessor y la función principal del pipeline.
+"""
 import pandas as pd
 import pytest
 from src.main import carga_procesa
@@ -5,6 +21,18 @@ from src.main import carga_procesa
 #Se genera un csv para la prueba del correcto funcionameinto del main.py
 @pytest.fixture
 def prueba_csv(tmp_path):
+    """
+    Fixture que genera un archivo CSV temporal con datos simulados
+    para probar el correcto funcionamiento del pipeline completo.
+
+    El archivo contiene columnas con:
+    - Nombres sucios
+    - Valores monetarios con símbolos
+    - Scores en texto
+    - Valores nulos y vacíos
+
+    Retorna la ruta al archivo CSV generado.
+    """
     df = pd.DataFrame({
         "Transaction ID #": [1, 2, 3],
         "Fech@_Registro": ["2025-01-01", "2025-01-02", "2025-01-03"],
@@ -20,20 +48,33 @@ def prueba_csv(tmp_path):
     return file_path
 
 def test_carga_procesa_csv(prueba_csv):
+    """
+    Verifica que la función principal del pipeline (carga_procesa)
+    procese correctamente un archivo CSV y retorne:
+
+    - Un DataFrame limpio y estandarizado
+    - Un resumen de calidad del DataFrame
+
+    Se validan:
+    - Existencia de columnas críticas
+    - Creación de columnas bandera (_nan)
+    - Conversión correcta de tipos de datos
+    - Tipo de retorno del resumen de calidad
+    """
     df, quality = carga_procesa(prueba_csv, sep=",", encoding="utf-8")
 
-    # Columnas criticas que deben existir
+    # Columnas criticas que deben existir tras el procesamiento
     for col in ["monto", "score", "fraude"]:
         assert col in df.columns
 
-    # Columnas bandera '_nan' deben existir
+    # Columnas bandera '_nan' que indican valores nulos
     for col in ["monto", "score", "fraude"]:
         assert f"{col}_nan" in df.columns
 
-    # Verificar tipos de datos de columnas clave
+    # Verificar tipos de datos de columnas clave sean numéricas
     assert pd.api.types.is_numeric_dtype(df["monto"])
     assert pd.api.types.is_numeric_dtype(df["score"])
     assert pd.api.types.is_numeric_dtype(df["fraude"])
 
-    # Calidad del DataFrame (nulos) debe devolver una serie
+    # Calidad del DataFrame (nulos) debe devolver una serie de Pandas
     assert isinstance(quality, pd.Series)
