@@ -29,7 +29,7 @@ class DataLoader:
         """
         Metodo base que debe ser sobrescrito por cada loader especifico.
         """
-        raise NotImplementedError("Este metodo no esta implementado para el formato de archivo que se compartio")
+        raise NotImplementedError("Este formato no esta implementado para la extension del archivo que se compartio")
 
 
 class CargaCSV(DataLoader):
@@ -57,7 +57,7 @@ class CargaJSON(DataLoader):
 
 
 # Asociacion entre extension y Loader
-LOADER_FACTORY = {
+EXTENSION_COMPATIBLE = {
     ".csv": CargaCSV,
     ".xlsx": CargaExcel,
     ".xls": CargaExcel,

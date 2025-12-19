@@ -1,6 +1,6 @@
 from pathlib import Path
 # Imports relativos al paquete src
-from src.data_loader import LOADER_FACTORY, ExcepcionCalidad
+from src.data_loader import EXTENSION_COMPATIBLE, ExcepcionCalidad
 from src.data_preprocessor import DataPreprocessor
 # Librería para tabular datos de manera presentable
 from tabulate import tabulate
@@ -20,11 +20,11 @@ def carga_procesa(filepath, **kwargs):
     """
     filepath = Path(filepath)
     ext = filepath.suffix.lower()
-    if ext not in LOADER_FACTORY:
+    if ext not in EXTENSION_COMPATIBLE:
         raise ValueError(f"Formato no soportado: {ext}")
 
     # Carga del archivo usando el loader adecuado
-    loader = LOADER_FACTORY[ext](filepath)
+    loader = EXTENSION_COMPATIBLE [ext](filepath)
     df = loader.read_file(**kwargs)
     print(DataPreprocessor)
     print(type(DataPreprocessor))
