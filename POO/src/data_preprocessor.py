@@ -42,14 +42,14 @@ class DataPreprocessor:
 
         self.df.columns = [limpiar_caracteres(c) for c in self.df.columns]
 
-        # Renombrar columnas especificas si existen
-        rename_map = {
-            "score_15": "score",
-            "es_fraude": "fraude",
-            "notes_comments": "comentarios"
-        }
+        # Renombrado de columnas especificas
+        renombrado_col = {
+                        "score_15": "score",
+                        "es_fraude": "fraude",         
+                        "notes_comments": "comentarios"
+                    }
         self.df.rename(
-            columns={k: v for k, v in rename_map.items() if k in self.df.columns},
+            columns={k: v for k, v in renombrado_col.items() if k in self.df.columns},
             inplace=True
         )
         return self.df
@@ -162,7 +162,7 @@ class DataPreprocessor:
             print("\n".join(alertas))
             raise ExcepcionCalidad("Falla en la calidad de datos")
 
-        print("\n==Tras la evaluacion del contenido del archivo, se concluye que:")
+        print("\n==Tras la evaluacion del contenido del archivo (monto y fraude), se concluye que:")
         print("\nEL SET DE DATOS ES APTO PARA MODELOS DE ML==")
         return True
 
